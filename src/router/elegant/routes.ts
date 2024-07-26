@@ -83,7 +83,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'manage',
       i18nKey: 'route.manage',
       icon: 'carbon:cloud-service-management',
-      order: 9,
+      order: 2,
       roles: ['R_ADMIN']
     },
     children: [
@@ -125,5 +125,17 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       }
     ]
+  },
+  {
+    name: 'tenant',
+    path: '/tenant',
+    component: 'layout.base$view.tenant',
+    meta: {
+      title: 'tenant',
+      i18nKey: 'route.tenant',
+      icon: 'ic:twotone-business',
+      order: 6,
+      roles: ['R_SUPER']
+    }
   }
 ];

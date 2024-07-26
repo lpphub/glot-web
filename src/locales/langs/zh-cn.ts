@@ -153,7 +153,8 @@ const local: App.I18n.Schema = {
     manage: '系统管理',
     manage_user: '用户管理',
     manage_role: '角色管理',
-    manage_menu: '菜单管理'
+    manage_menu: '菜单管理',
+    tenant: '租户管理'
   },
   page: {
     login: {
@@ -347,6 +348,30 @@ const local: App.I18n.Schema = {
           iconify: 'iconify图标',
           local: '本地图标'
         }
+      }
+    },
+    tenant: {
+      common: {
+        list: '租户列表',
+        status: {
+          enable: '正常',
+          disable: '冻结'
+        }
+      },
+      id: 'ID',
+      code: '租户编码',
+      name: '租户名称',
+      status: '状态',
+      contacts: '联系人',
+      phone: '手机号',
+      address: '公司地址',
+      size: '公司规模',
+      formTip: {
+        name: '请输入租户名称',
+        code: '请输入租户编码',
+        phone: '请输入手机号',
+        contacts: '请输入联系人',
+        status: '请选择租户状态'
       }
     }
   },

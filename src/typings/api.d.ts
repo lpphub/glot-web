@@ -237,4 +237,22 @@ declare namespace Api {
       children?: MenuTree[];
     };
   }
+
+  namespace TenantManage {
+    type Tenant = Common.CommonRecord<{
+      code: string;
+      name: string;
+      contacts: string;
+      phone: string;
+      address: string;
+      size: string;
+    }>;
+
+    type TenantSearchParams = CommonType.RecordNullable<
+      Pick<Api.TenantManage.Tenant, 'name' | 'code' | 'status'> &
+        Pick<Common.PaginatingCommonParams, 'current' | 'size'>
+    >;
+
+    type TenantList = Common.PaginatingQueryRecord<Tenant>;
+  }
 }

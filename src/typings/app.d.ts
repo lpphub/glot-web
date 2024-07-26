@@ -575,6 +575,30 @@ declare namespace App {
             };
           };
         };
+        tenant: {
+          common: {
+            list: string;
+            status: {
+              enable: string;
+              disable: string;
+            };
+          };
+          id: string;
+          code: string;
+          name: string;
+          status: string;
+          contacts: string;
+          phone: string;
+          address: string;
+          size: string;
+          formTip: {
+            code: string;
+            name: string;
+            status: string;
+            contacts: string;
+            phone: string;
+          };
+        };
       };
       form: {
         required: string;

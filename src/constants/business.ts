@@ -7,13 +7,6 @@ export const enableStatusRecord: Record<Api.Common.EnableStatus, App.I18n.I18nKe
 
 export const enableStatusOptions = transformRecordToOption(enableStatusRecord);
 
-export const userGenderRecord: Record<Api.SystemManage.UserGender, App.I18n.I18nKey> = {
-  '1': 'page.manage.user.gender.male',
-  '2': 'page.manage.user.gender.female'
-};
-
-export const userGenderOptions = transformRecordToOption(userGenderRecord);
-
 export const menuTypeRecord: Record<Api.SystemManage.MenuType, App.I18n.I18nKey> = {
   1: 'page.manage.menu.type.directory',
   2: 'page.manage.menu.type.menu'
@@ -27,3 +20,10 @@ export const menuIconTypeRecord: Record<Api.SystemManage.IconType, App.I18n.I18n
 };
 
 export const menuIconTypeOptions = transformRecordToOption(menuIconTypeRecord);
+
+export const tenantStatusRecord: Record<Api.Common.EnableStatus, App.I18n.I18nKey> = {
+  1: 'page.tenant.common.status.enable',
+  2: 'page.tenant.common.status.disable'
+};
+
+export const tenantStatusOptions = transformRecordToOption(tenantStatusRecord);

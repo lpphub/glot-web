@@ -153,7 +153,8 @@ const local: App.I18n.Schema = {
     manage: 'System Manage',
     manage_user: 'User Manage',
     manage_role: 'Role Manage',
-    manage_menu: 'Menu Manage'
+    manage_menu: 'Menu Manage',
+    tenant: 'Tenant Manage'
   },
   page: {
     login: {
@@ -347,6 +348,30 @@ const local: App.I18n.Schema = {
           iconify: 'Iconify Icon',
           local: 'Local Icon'
         }
+      }
+    },
+    tenant: {
+      common: {
+        list: 'Tenant List',
+        status: {
+          enable: 'Enable',
+          disable: 'Disable'
+        }
+      },
+      id: 'ID',
+      code: 'Tenant Code',
+      name: 'Tenant Name',
+      status: 'Tenant Status',
+      contacts: 'Contacts',
+      phone: 'Phone',
+      address: 'Company Address',
+      size: 'Company Size',
+      formTip: {
+        name: 'Please enter tenant name',
+        code: 'Please enter tenant code',
+        phone: 'Please enter phone',
+        contacts: 'Please enter contacts',
+        status: 'Please select tenant status'
       }
     }
   },
