@@ -265,6 +265,7 @@ const local: App.I18n.Schema = {
         userEmail: '邮箱',
         userStatus: '用户状态',
         userRole: '用户角色',
+        userTenant: '所属租户',
         form: {
           userName: '请输入用户名',
           userGender: '请选择性别',
@@ -272,7 +273,8 @@ const local: App.I18n.Schema = {
           userPhone: '请输入手机号',
           userEmail: '请输入邮箱',
           userStatus: '请选择用户状态',
-          userRole: '请选择用户角色'
+          userRole: '请选择用户角色',
+          userTenant: '请选择所属租户'
         },
         addUser: '新增用户',
         editUser: '编辑用户',

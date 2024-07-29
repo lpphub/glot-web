@@ -125,34 +125,25 @@ declare namespace Api {
       ids?: number[];
     };
 
-    /**
-     * user gender
-     *
-     * - "1": "male"
-     * - "2": "female"
-     */
-    type UserGender = '1' | '2';
-
     /** user */
     type User = Common.CommonRecord<{
       /** user name */
       username: string;
-      /** user gender */
-      userGender: UserGender | null;
       /** user nick name */
       nickname: string;
       /** user phone */
       phone: string;
       /** user email */
       email: string;
+      /** user tenant id */
+      tenantId: number | null;
       /** user role code collection */
       roles: string[];
     }>;
 
     /** user search params */
     type UserSearchParams = CommonType.RecordNullable<
-      Pick<Api.SystemManage.User, 'username' | 'userGender' | 'nickname' | 'phone' | 'email' | 'status'> &
-        CommonSearchParams
+      Pick<Api.SystemManage.User, 'username' | 'nickname' | 'phone' | 'email' | 'status'> & CommonSearchParams
     >;
 
     /** user list */

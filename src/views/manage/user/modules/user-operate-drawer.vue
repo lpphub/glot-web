@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
-import { fetchGetTenantRoles, postUser } from '@/service/api';
+import { fetchGetAllRoles, fetchGetTenantList, postUser } from '@/service/api';
 import { $t } from '@/locales';
 import { enableStatusOptions } from '@/constants/business';
 
@@ -28,6 +28,8 @@ const visible = defineModel<boolean>('visible', {
   default: false
 });
 
+const isEdit = computed(() => props.operateType === 'edit');
+
 const { formRef, validate, restoreValidation } = useNaiveForm();
 const { defaultRequiredRule } = useFormRules();
 
@@ -39,7 +41,10 @@ const title = computed(() => {
   return titles[props.operateType];
 });
 
-type Model = Pick<Api.SystemManage.User, 'id' | 'username' | 'nickname' | 'phone' | 'email' | 'roles' | 'status'>;
+type Model = Pick<
+  Api.SystemManage.User,
+  'id' | 'username' | 'nickname' | 'phone' | 'email' | 'roles' | 'status' | 'tenantId'
+>;
 
 const model: Model = reactive(createDefaultModel());
 
@@ -51,7 +56,8 @@ function createDefaultModel(): Model {
     phone: '',
     email: '',
     roles: [],
-    status: null
+    status: null,
+    tenantId: null
   };
 }
 
@@ -71,7 +77,7 @@ const rules = computed<Record<RuleKey, App.Global.FormRule>>(() => {
 const roleOptions = ref<CommonType.Option<string>[]>([]);
 
 async function getRoleOptions() {
-  const { error, data } = await fetchGetTenantRoles();
+  const { error, data } = await fetchGetAllRoles();
 
   if (!error) {
     const options = data.map(item => ({
@@ -81,6 +87,29 @@ async function getRoleOptions() {
 
     roleOptions.value = [...options];
   }
+}
+
+const tenantLoading = ref(false);
+const tenantOptions = ref<CommonType.Option<number>[]>([]);
+
+async function getTenantOptions(query: string) {
+  if (!query.length) {
+    tenantOptions.value = [];
+    return;
+  }
+
+  tenantLoading.value = true;
+  const { error, data } = await fetchGetTenantList({ name: query });
+
+  if (!error) {
+    const options = data.list.map(item => ({
+      label: item.name,
+      value: item.id
+    }));
+
+    tenantOptions.value = [...options];
+  }
+  tenantLoading.value = false;
 }
 
 function handleInitModel() {
@@ -146,6 +175,18 @@ watch(visible, () => {
             multiple
             :options="roleOptions"
             :placeholder="$t('page.manage.user.form.userRole')"
+          />
+        </NFormItem>
+        <NFormItem v-if="!isEdit" :label="$t('page.manage.user.userTenant')" path="tenant">
+          <NSelect
+            v-model:value="model.tenantId"
+            filterable
+            :placeholder="$t('page.manage.user.form.userTenant')"
+            :options="tenantOptions"
+            :loading="tenantLoading"
+            clearable
+            remote
+            @search="getTenantOptions"
           />
         </NFormItem>
       </NForm>
