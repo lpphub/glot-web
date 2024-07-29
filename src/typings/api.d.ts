@@ -246,6 +246,7 @@ declare namespace Api {
       phone: string;
       address: string;
       size: string;
+      roles: string[];
     }>;
 
     type TenantSearchParams = CommonType.RecordNullable<

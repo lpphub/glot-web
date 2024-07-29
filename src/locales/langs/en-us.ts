@@ -371,8 +371,12 @@ const local: App.I18n.Schema = {
         code: 'Please enter tenant code',
         phone: 'Please enter phone',
         contacts: 'Please enter contacts',
-        status: 'Please select tenant status'
-      }
+        status: 'Please select tenant status',
+        roles: 'Please select role scopes'
+      },
+      addTenant: 'Add Tenant',
+      editTenant: 'Edit Tenant',
+      roleScope: 'Role Scope'
     }
   },
   form: {

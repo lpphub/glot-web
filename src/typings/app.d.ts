@@ -597,7 +597,11 @@ declare namespace App {
             status: string;
             contacts: string;
             phone: string;
+            roles: string;
           };
+          roleScope: string;
+          addTenant: string;
+          editTenant: string;
         };
       };
       form: {

@@ -355,7 +355,7 @@ const local: App.I18n.Schema = {
         list: '租户列表',
         status: {
           enable: '正常',
-          disable: '冻结'
+          disable: '禁用'
         }
       },
       id: 'ID',
@@ -371,8 +371,12 @@ const local: App.I18n.Schema = {
         code: '请输入租户编码',
         phone: '请输入手机号',
         contacts: '请输入联系人',
-        status: '请选择租户状态'
-      }
+        status: '请选择租户状态',
+        roles: '请选择可分配角色'
+      },
+      addTenant: '新增租户',
+      editTenant: '编辑租户',
+      roleScope: '角色范围'
     }
   },
   form: {

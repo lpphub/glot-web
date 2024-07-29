@@ -1,13 +1,21 @@
 <script setup lang="tsx">
-import { NButton, NPopconfirm, NTag } from 'naive-ui';
+import { NButton, NTag } from 'naive-ui';
+import { useBoolean } from '@sa/hooks';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { fetchGetTenantList } from '@/service/api';
 import { $t } from '@/locales';
 import { useAppStore } from '@/store/modules/app';
 import { tenantStatusRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import TenantSearch from './modules/tenant-search.vue';
+import TenantTableHeader from './modules/tenant-table-header.vue';
+import TenantOperateModal, { type OperateType } from './modules/tenant-operate-modal.vue';
 
 const appStore = useAppStore();
+
+const { bool: visible, setTrue: openModal } = useBoolean();
+const operateType = ref<OperateType>('add');
 
 const {
   columns,
@@ -30,11 +38,6 @@ const {
     name: null
   },
   columns: () => [
-    {
-      type: 'selection',
-      align: 'center',
-      width: 48
-    },
     {
       key: 'index',
       title: $t('common.index'),
@@ -92,49 +95,29 @@ const {
       width: 130,
       render: row => (
         <div class="flex-center gap-8px">
-          <NButton type="primary" ghost size="small" onClick={() => edit(row.id)}>
+          <NButton type="primary" ghost size="small" onClick={() => handleEdit(row)}>
             {$t('common.edit')}
           </NButton>
-          <NPopconfirm onPositiveClick={() => handleDelete(row.id)}>
-            {{
-              default: () => $t('common.confirmDelete'),
-              trigger: () => (
-                <NButton type="error" ghost size="small">
-                  {$t('common.delete')}
-                </NButton>
-              )
-            }}
-          </NPopconfirm>
         </div>
       )
     }
   ]
 });
 
-const {
-  // drawerVisible,
-  // operateType,
-  // editingData,
-  handleAdd,
-  handleEdit,
-  checkedRowKeys,
-  onBatchDeleted,
-  onDeleted
-  // closeDrawer
-} = useTableOperate(data, getData);
+const { checkedRowKeys } = useTableOperate(data, getData);
 
-async function handleBatchDelete() {
-  onBatchDeleted();
+const editingData: Ref<Api.TenantManage.Tenant | null> = ref(null);
+
+function handleAdd() {
+  operateType.value = 'add';
+  openModal();
 }
 
-async function handleDelete(id: number) {
-  console.log(id);
+function handleEdit(item: Api.TenantManage.Tenant) {
+  operateType.value = 'edit';
+  editingData.value = { ...item };
 
-  onDeleted();
-}
-
-function edit(id: number) {
-  handleEdit(id);
+  openModal();
 }
 </script>
 
@@ -143,14 +126,7 @@ function edit(id: number) {
     <TenantSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />
     <NCard :title="$t('page.tenant.common.list')" :bordered="false" size="small" class="sm:flex-1-hidden card-wrapper">
       <template #header-extra>
-        <TableHeaderOperation
-          v-model:columns="columnChecks"
-          :disabled-delete="checkedRowKeys.length === 0"
-          :loading="loading"
-          @add="handleAdd"
-          @delete="handleBatchDelete"
-          @refresh="getData"
-        />
+        <TenantTableHeader v-model:columns="columnChecks" :loading="loading" @add="handleAdd" @refresh="getData" />
       </template>
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
@@ -165,14 +141,12 @@ function edit(id: number) {
         :pagination="mobilePagination"
         class="sm:h-full"
       />
-      <!--
- <UserOperateDrawer
-        v-model:visible="drawerVisible"
+      <TenantOperateModal
+        v-model:visible="visible"
         :operate-type="operateType"
         :row-data="editingData"
         @submitted="getDataByPage"
       />
--->
     </NCard>
   </div>
 </template>

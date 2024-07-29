@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
-import { fetchGetAllRoles, postUser } from '@/service/api';
+import { fetchGetTenantRoles, postUser } from '@/service/api';
 import { $t } from '@/locales';
 import { enableStatusOptions } from '@/constants/business';
 
@@ -55,18 +55,23 @@ function createDefaultModel(): Model {
   };
 }
 
-type RuleKey = Extract<keyof Model, 'username' | 'status'>;
+type RuleKey = Extract<keyof Model, 'username' | 'status' | 'phone' | 'email'>;
 
-const rules: Record<RuleKey, App.Global.FormRule> = {
-  username: defaultRequiredRule,
-  status: defaultRequiredRule
-};
+const rules = computed<Record<RuleKey, App.Global.FormRule>>(() => {
+  const { patternRules } = useFormRules(); // inside computed to make locale reactive
+  return {
+    username: defaultRequiredRule,
+    status: defaultRequiredRule,
+    email: patternRules.email,
+    phone: patternRules.phone
+  };
+});
 
 /** the enabled role options */
 const roleOptions = ref<CommonType.Option<string>[]>([]);
 
 async function getRoleOptions() {
-  const { error, data } = await fetchGetAllRoles();
+  const { error, data } = await fetchGetTenantRoles();
 
   if (!error) {
     const options = data.map(item => ({
