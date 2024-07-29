@@ -84,7 +84,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.manage',
       icon: 'carbon:cloud-service-management',
       order: 2,
-      roles: ['R_ADMIN']
+      roles: ['R_SUPER']
     },
     children: [
       {
@@ -121,7 +121,7 @@ export const generatedRoutes: GeneratedRoute[] = [
           i18nKey: 'route.manage_user',
           icon: 'ic:round-manage-accounts',
           order: 1,
-          roles: ['R_ADMIN']
+          roles: ['R_SUPER']
         }
       }
     ]
