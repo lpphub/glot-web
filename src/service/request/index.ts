@@ -44,19 +44,18 @@ export const request = createFlatRequest<App.Service.Response, RequestInstanceSt
         request.state.errMsgStack = request.state.errMsgStack.filter(msg => msg !== response.data.err_msg);
       }
 
+      const errno = String(response.data.err_no);
+
       // when the backend response code is in `logoutCodes`, it means the user will be logged out and redirected to login page
       const logoutCodes = import.meta.env.VITE_SERVICE_LOGOUT_CODES?.split(',') || [];
-      if (logoutCodes.includes(response.data.err_no)) {
+      if (logoutCodes.includes(errno)) {
         handleLogout();
         return null;
       }
 
       // when the backend response code is in `modalLogoutCodes`, it means the user will be logged out by displaying a modal
       const modalLogoutCodes = import.meta.env.VITE_SERVICE_MODAL_LOGOUT_CODES?.split(',') || [];
-      if (
-        modalLogoutCodes.includes(response.data.err_no) &&
-        !request.state.errMsgStack?.includes(response.data.err_msg)
-      ) {
+      if (modalLogoutCodes.includes(errno) && !request.state.errMsgStack?.includes(response.data.err_msg)) {
         request.state.errMsgStack = [...(request.state.errMsgStack || []), response.data.err_msg];
 
         // prevent the user from refreshing the page
@@ -82,7 +81,7 @@ export const request = createFlatRequest<App.Service.Response, RequestInstanceSt
       // when the backend response code is in `expiredTokenCodes`, it means the token is expired, and refresh token
       // the api `refreshToken` can not return error code in `expiredTokenCodes`, otherwise it will be a dead loop, should return `logoutCodes` or `modalLogoutCodes`
       const expiredTokenCodes = import.meta.env.VITE_SERVICE_EXPIRED_TOKEN_CODES?.split(',') || [];
-      if (expiredTokenCodes.includes(response.data.err_no) && !request.state.isRefreshingToken) {
+      if (expiredTokenCodes.includes(errno) && !request.state.isRefreshingToken) {
         request.state.isRefreshingToken = true;
 
         const refreshConfig = await handleRefreshToken(response.config);
@@ -108,7 +107,7 @@ export const request = createFlatRequest<App.Service.Response, RequestInstanceSt
       // get backend error message and code
       if (error.code === BACKEND_ERROR_CODE) {
         message = error.response?.data?.err_msg || message;
-        backendErrorCode = error.response?.data?.err_no || '';
+        backendErrorCode = String(error.response?.data?.err_no) || '';
       }
 
       // the error message is displayed in the modal

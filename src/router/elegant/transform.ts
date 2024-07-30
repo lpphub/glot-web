@@ -171,6 +171,8 @@ const routeMap: RouteMap = {
   "manage_menu": "/manage/menu",
   "manage_role": "/manage/role",
   "manage_user": "/manage/user",
+  "team": "/team",
+  "team_account": "/team/account",
   "tenant": "/tenant"
 };
 

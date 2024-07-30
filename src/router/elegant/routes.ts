@@ -127,6 +127,26 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
+    name: 'team',
+    path: '/team',
+    component: 'layout.base',
+    meta: {
+      title: 'team',
+      i18nKey: 'route.team'
+    },
+    children: [
+      {
+        name: 'team_account',
+        path: '/team/account',
+        component: 'view.team_account',
+        meta: {
+          title: 'team_account',
+          i18nKey: 'route.team_account'
+        }
+      }
+    ]
+  },
+  {
     name: 'tenant',
     path: '/tenant',
     component: 'layout.base$view.tenant',

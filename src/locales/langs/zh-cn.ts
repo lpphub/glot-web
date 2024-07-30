@@ -154,7 +154,9 @@ const local: App.I18n.Schema = {
     manage_user: '用户管理',
     manage_role: '角色管理',
     manage_menu: '菜单管理',
-    tenant: '租户管理'
+    tenant: '租户管理',
+    team: '团队管理',
+    team_account: '账户管理'
   },
   page: {
     login: {

@@ -154,7 +154,9 @@ const local: App.I18n.Schema = {
     manage_user: 'User Manage',
     manage_role: 'Role Manage',
     manage_menu: 'Menu Manage',
-    tenant: 'Tenant Manage'
+    tenant: 'Tenant Manage',
+    team: 'Team Manage',
+    team_account: 'Account Manage'
   },
   page: {
     login: {
