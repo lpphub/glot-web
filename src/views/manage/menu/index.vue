@@ -222,7 +222,7 @@ async function getAllPages() {
   // const { data: pages } = await fetchGetAllPages();
   // allPages.value = pages || [];
   // 不从后端拿，前端配置
-  const pages: LastLevelRouteKey[] = ['home', 'manage_menu', 'manage_role', 'manage_user', 'team_account'];
+  const pages: LastLevelRouteKey[] = ['home', 'manage_menu', 'manage_role', 'manage_user', 'team_oauth'];
 
   allPages.value = pages;
 }

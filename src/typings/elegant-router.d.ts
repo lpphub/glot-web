@@ -28,7 +28,7 @@ declare module "@elegant-router/types" {
     "manage_role": "/manage/role";
     "manage_user": "/manage/user";
     "team": "/team";
-    "team_account": "/team/account";
+    "team_oauth": "/team/oauth";
     "tenant": "/tenant";
   };
 
@@ -95,7 +95,7 @@ declare module "@elegant-router/types" {
     | "manage_menu"
     | "manage_role"
     | "manage_user"
-    | "team_account"
+    | "team_oauth"
     | "tenant"
   >;
 

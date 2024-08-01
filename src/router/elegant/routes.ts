@@ -132,16 +132,18 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base',
     meta: {
       title: 'team',
-      i18nKey: 'route.team'
+      i18nKey: 'route.team',
+      icon: 'material-symbols:team-dashboard',
     },
     children: [
       {
-        name: 'team_account',
-        path: '/team/account',
-        component: 'view.team_account',
+        name: 'team_oauth',
+        path: '/team/oauth',
+        component: 'view.team_oauth',
         meta: {
-          title: 'team_account',
-          i18nKey: 'route.team_account'
+          title: 'team_oauth',
+          i18nKey: 'route.team_oauth',
+          icon: 'mdi:account-key'
         }
       }
     ]

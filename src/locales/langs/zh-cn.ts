@@ -156,7 +156,7 @@ const local: App.I18n.Schema = {
     manage_menu: '菜单管理',
     tenant: '租户管理',
     team: '团队管理',
-    team_account: '账户管理'
+    team_oauth: '授权管理'
   },
   page: {
     login: {
@@ -381,6 +381,12 @@ const local: App.I18n.Schema = {
       addTenant: '新增租户',
       editTenant: '编辑租户',
       roleScope: '角色范围'
+    },
+    team: {
+      oauth: {
+        account: '授权账户',
+        authBind: '授权绑定'
+      }
     }
   },
   form: {

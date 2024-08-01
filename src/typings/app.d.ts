@@ -605,11 +605,12 @@ declare namespace App {
           addTenant: string;
           editTenant: string;
         };
-        // team: {
-        //   account: {
-        //     token: string;
-        //   };
-        // };
+        team: {
+          oauth: {
+            account: string;
+            authBind: string;
+          };
+        };
       };
       form: {
         required: string;

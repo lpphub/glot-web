@@ -156,7 +156,7 @@ const local: App.I18n.Schema = {
     manage_menu: 'Menu Manage',
     tenant: 'Tenant Manage',
     team: 'Team Manage',
-    team_account: 'Account Manage'
+    team_oauth: 'OAuth Manage'
   },
   page: {
     login: {
@@ -381,6 +381,12 @@ const local: App.I18n.Schema = {
       addTenant: 'Add Tenant',
       editTenant: 'Edit Tenant',
       roleScope: 'Role Scope'
+    },
+    team: {
+      oauth: {
+        account: 'Oauth Account',
+        authBind: 'Auth Bind'
+      }
     }
   },
   form: {
